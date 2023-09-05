@@ -12,6 +12,7 @@
       "arrowParens": "always",
       // "arrowParens": "avoid",
       "semi": true // PARA COLOCAR O ; NO FINAL, EM INGLÊS semicolon
-    }]
+    }],
+    "camelcase": "off"
   }
 }
