@@ -13,6 +13,7 @@
       // "arrowParens": "avoid",
       "semi": true // PARA COLOCAR O ; NO FINAL, EM INGLÊS semicolon
     }],
-    "camelcase": "off"
+    "camelcase": "off",
+    "no-useless-constructor": "off"
   }
 }
