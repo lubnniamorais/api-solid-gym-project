@@ -27,6 +27,16 @@ class InMemoryUsersRepository implements UsersRepository {
 
     return findUser;
   }
+
+  async findById(id: string) {
+    const findUser = this.users.find((user) => user.id === id);
+
+    if (!findUser) {
+      return null;
+    }
+
+    return findUser;
+  }
 }
 
 export { InMemoryUsersRepository };
