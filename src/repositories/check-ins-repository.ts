@@ -7,6 +7,7 @@ interface CheckInsRepository {
     validated_at,
     created_at,
   }: Prisma.CheckInUncheckedCreateInput): Promise<CheckIn>;
+  findByUserIdOnDate(userId: string, date: Date): Promise<CheckIn | null>;
 }
 
 export { CheckInsRepository };
