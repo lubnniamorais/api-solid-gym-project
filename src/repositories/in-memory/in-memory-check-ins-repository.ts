@@ -12,7 +12,6 @@ class InMemoryCheckInsRepository implements CheckInsRepository {
     user_id,
     gym_id,
     validated_at,
-    created_at,
   }: Prisma.CheckInUncheckedCreateInput) {
     const checkIn = {
       id: randomUUID(),
@@ -44,6 +43,12 @@ class InMemoryCheckInsRepository implements CheckInsRepository {
     }
 
     return checkInOnSameDate;
+  }
+
+  async findManyByUserId(userId: string, page: number) {
+    return this.checkIns
+      .filter((checkIn) => checkIn.user_id === userId)
+      .slice((page - 1) * 20, page * 20);
   }
 }
 
