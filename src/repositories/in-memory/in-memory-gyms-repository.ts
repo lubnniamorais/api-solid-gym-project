@@ -38,6 +38,12 @@ class InMemoryGymsRepository implements GymsRepository {
 
     return findGym;
   }
+
+  async searchManyByQuery(query: string, page: number) {
+    return this.gyms
+      .filter((gym) => gym.title.includes(query))
+      .splice((page - 1) * 20, page * 20);
+  }
 }
 
 export { InMemoryGymsRepository };
