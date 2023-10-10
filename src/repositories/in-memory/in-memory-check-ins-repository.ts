@@ -51,8 +51,30 @@ class InMemoryCheckInsRepository implements CheckInsRepository {
       .slice((page - 1) * 20, page * 20);
   }
 
+  async findById(id: string) {
+    const findCheckIn = this.checkIns.find((checkIn) => checkIn.id === id);
+
+    if (!findCheckIn) {
+      return null;
+    }
+
+    return findCheckIn;
+  }
+
   async countByUserId(userId: string) {
     return this.checkIns.filter((checkIn) => checkIn.user_id === userId).length;
+  }
+
+  async save(checkIn: CheckIn) {
+    const checkInIndex = this.checkIns.findIndex(
+      (findCheckIn) => findCheckIn.id === checkIn.id,
+    );
+
+    if (checkInIndex >= 0) {
+      this.checkIns[checkInIndex] = checkIn;
+    }
+
+    return checkIn;
   }
 }
 
