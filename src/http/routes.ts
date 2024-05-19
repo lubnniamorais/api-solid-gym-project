@@ -2,10 +2,15 @@ import { FastifyInstance } from 'fastify';
 
 import { register } from './controllers/register';
 import { authenticate } from './controllers/authenticate';
+import { profile } from './controllers/profile';
+import { verifyJWT } from './middlewares/verify-jwt';
 
 async function appRoutes(app: FastifyInstance) {
   app.post('/users', register);
   app.post('/authenticate_user/session', authenticate);
+
+  /** Authenticated routes */
+  app.get('/me', { onRequest: [verifyJWT] }, profile);
 }
 
 export { appRoutes };
