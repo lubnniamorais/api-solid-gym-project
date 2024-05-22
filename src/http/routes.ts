@@ -7,7 +7,7 @@ import { verifyJWT } from './middlewares/verify-jwt';
 
 async function appRoutes(app: FastifyInstance) {
   app.post('/users', register);
-  app.post('/authenticate_user/session', authenticate);
+  app.post('/sessions', authenticate);
 
   /** Authenticated routes */
   app.get('/me', { onRequest: [verifyJWT] }, profile);
