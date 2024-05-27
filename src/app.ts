@@ -1,4 +1,5 @@
 import fastify from 'fastify';
+import fastifyCookie from '@fastify/cookie';
 import { env } from './env';
 import { ZodError } from 'zod';
 
@@ -12,7 +13,18 @@ const app = fastify();
 
 app.register(fastifyJwt, {
   secret: env.JWT_SECRET,
+  cookie: {
+    cookieName: 'refreshToken',
+    signed: false,
+  },
+  sign: {
+    // a cada intervalo de 10 minutos, eu vou checar novamente se esse usuário tem ali
+    // o refresh token para criar um novo JWT para ele.
+    expiresIn: '10m',
+  },
 });
+
+app.register(fastifyCookie);
 
 app.register(usersRoutes);
 app.register(gymsRoutes);
