@@ -18,6 +18,6 @@ jobs:
           cache: 'npm' 
       
       # Instala apenas as dependências, não mexe no package.json, nada.
-      run: npm ci
+      - run: npm ci
 
-      run: npm run test
+      - run: npm run test
