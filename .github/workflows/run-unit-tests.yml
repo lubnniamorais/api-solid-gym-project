@@ -1,0 +1,23 @@
+name: Run Unit Tests
+
+on: [push]
+
+jobs:
+  run-unit-tests
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          # Instala as dependências e cria um cache, se nada for mudado nas dependências então,
+          # o cache é reaproveitado.
+          cache: 'npm' 
+      
+      # Instala apenas as dependências, não mexe no package.json, nada.
+      run: npm ci
+
+      run: npm run test
